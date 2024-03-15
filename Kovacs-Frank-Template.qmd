@@ -2,7 +2,7 @@
 author: "Francis R. Kovacs"
 title: "Document Title"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
-company: 'Axis Group'
+company: 'Custom Field Within LaTeX Template'
 format:
   pdf:
     highlight: tango
