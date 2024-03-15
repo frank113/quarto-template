@@ -1,0 +1,189 @@
+---
+author: "Francis R. Kovacs"
+title: "Document Title"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+company: 'Axis Group'
+format:
+  pdf:
+    highlight: tango
+    template: template_format.tex
+    include-in-header: math_commands.txt
+    latex_engine: xelatex
+    keep_tex: false
+  html:
+    highlight-style: github
+    
+geometry: margin=0.75in
+fontsize: 11pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  eval = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.align = "center",
+  fig.pos = 'H',
+  fig.height=5, fig.width=7.5,
+  class.source="bg-warning"
+)
+## knitr::opts_chunk$set(dev = 'pdf')
+
+
+## source: https://bookdown.org/yihui/rmarkdown-cookbook/chunk-styling.html
+## knitr::opts_chunk$set(fig.height=3, fig.width=3, fig.cap="3in by 3in Picture""
+## set seed
+
+## laod the data in
+
+options(kableExtra.latex.load_package = FALSE)
+library(kableExtra)
+library(magrittr)
+library(assertthat)
+library(pander)
+library(ggplot2)
+library(gridExtra)
+library(car)
+library(GGally)
+library(HH)
+library(glmnet)
+## library(marginalmodelplots)
+library(arm)
+library(DHARMa)
+library(nlme)
+
+## kable(rad_vol) %>%
+##   kable_styling(bootstrap_options = "bordered",
+##                full_width = FALSE)
+
+my.table <- function(dat, cap = "") {
+  return(
+    kable(dat,
+      caption = cap) %>%
+  kable_styling(bootstrap_options = "bordered",
+                latex_options = "hold_position",
+                full_width = FALSE)
+  )
+}
+
+proj.theme <- function(font.size = 14) {
+  return( theme(
+    plot.caption = element_text(hjust = 0.5,
+                              size = font.size + 2,
+                              vjust = 0,
+                              family = "Times",
+                              face = "bold"),
+    plot.title = element_text(hjust = 0.5,
+                            size = font.size + 4,
+                            family = "Times"),
+    axis.title.y = element_text(size = font.size + 1,
+                             family = "Times"),
+    axis.title.x = element_text(vjust = 0,
+                              size = font.size + 1,
+                              family = "Times"),
+    plot.subtitle = element_text(size = font.size,
+                               family = "Times"),
+    axis.ticks = element_line(size = 1.75)
+  ))
+}
+
+## data_arr is of the form cars04$Name -> data_arr
+create_summary_table <- function(data_arr) {
+  summary_raw <- summary(data_arr)
+  row_names <- c(
+    names(summary_raw),
+    "SD"
+  )
+  row_values <- c(
+    as.vector(summary_raw),
+    sd(data_arr)
+  )
+  data_df <- t(
+      data.frame(
+        row_values,
+        row.names = row_names
+      )
+    )
+  rownames(data_df) <- c("")
+  data_df <- apply(
+    X = data_df,
+    MARGIN = c(1, 2),
+    FUN = function(z) {
+      return(
+        round(z, 2)
+      )
+    }
+  )
+  return(
+    data_df
+  )
+}
+
+set.seed(1356)
+```
+
+Dummy text.
+
+```{r}
+data("iris")
+create_summary_table(iris$Sepal.Width)
+```
+
+We will now plot the distribution of `Sepal.Width` variable using `ggplot`. The domain of this graph is $\N$.
+
+```{r, echo=FALSE}
+ggplot(data = iris, aes(x = Sepal.Width)) + 
+  geom_histogram() + 
+  geom_density(stat = "count", col = "red") + 
+  geom_vline(aes(xintercept = 3.25), col = "blue") +
+  proj.theme()
+```
+
+The chunk options can also be set in the style suggested by Posit:
+
+```{r}
+#| echo: true
+#| label: fig-1
+#| fig-cap: "Distribution of Sepal Characteristics"
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, 
+                        col = Species)) + 
+  geom_point() + 
+  geom_smooth(se = FALSE, formula = y ~ x) + 
+  ggtitle("Sepal Length vs. Width") + 
+  proj.theme()
+```
+
+We can create a call to reference the graph using the "@fig-1" @fig-1 call in text. 
+
+The location of cell attributes sequentially feels cumbersome at first yet the feature to automatically add the preceeding text ensures the experience is as smooth as can be. 
+
+```{r}
+my.table(head(iris))
+```
+
+
+
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+Link to download the CLI: [link](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwj0wNDm7NmEAxVHElkFHZ3SAJgQFnoECAYQAQ&url=https%3A%2F%2Fgithub.com%2Fquarto-dev%2Fquarto-cli&usg=AOvVaw0Naaz-jzc7H6STadIUqo_h&opi=89978449)
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this 
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
