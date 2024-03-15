@@ -123,6 +123,8 @@ create_summary_table <- function(data_arr) {
 set.seed(1356)
 ```
 
+# Dummy Section 1
+
 Dummy text.
 
 ```{r}
@@ -163,7 +165,9 @@ my.table(head(iris))
 ```
 
 
+# Dummy Section 2
 
+The following text is generated upon the creation of a new `Qmd` document within RStudio.
 
 ## Quarto
 
