@@ -2,7 +2,8 @@
 author: "Francis R. Kovacs"
 title: "Document Title"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
-company: 'Custom Field Within LaTeX Template'
+company: 'FRK Enterprises LLC'
+client: 'ABC Corporation'
 format:
   pdf:
     highlight: tango
@@ -127,12 +128,14 @@ set.seed(1356)
 
 Dummy text.
 
+In the below context the code is visible within the rendered pdf.
+
 ```{r}
 data("iris")
 create_summary_table(iris$Sepal.Width)
 ```
 
-We will now plot the distribution of `Sepal.Width` variable using `ggplot`. The domain of this graph is $\N$.
+We will now plot the distribution of `Sepal.Width` variable using `ggplot`. The domain of this graph is $\N$. Note the LaTeX use of $\N$. This shortcut is defined in `math_commands.txt` along with $\P$, $\R$ and others.
 
 ```{r, echo=FALSE}
 ggplot(data = iris, aes(x = Sepal.Width)) + 
@@ -156,9 +159,9 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width,
   proj.theme()
 ```
 
-We can create a call to reference the graph using the "@fig-1" @fig-1 call in text. 
+We can create a call to reference the graph using the "@fig-1" @fig-1 call in text. The location of cell attributes sequentially feels cumbersome at first yet the feature to automatically add the preceeding text ensures the experience is as smooth as can be. 
 
-The location of cell attributes sequentially feels cumbersome at first yet the feature to automatically add the preceeding text ensures the experience is as smooth as can be. 
+I use a custom function `my.table` that renders tables in a PDF-friendly way. Please tweak as needed to best suit your needs.
 
 ```{r}
 my.table(head(iris))
@@ -167,27 +170,23 @@ my.table(head(iris))
 
 # Dummy Section 2
 
-The following text is generated upon the creation of a new `Qmd` document within RStudio.
+We will use Lorem Ipsum text to illustrate various text featueres. 
 
-## Quarto
+Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+Block quote:
 
-Link to download the CLI: [link](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwj0wNDm7NmEAxVHElkFHZ3SAJgQFnoECAYQAQ&url=https%3A%2F%2Fgithub.com%2Fquarto-dev%2Fquarto-cli&usg=AOvVaw0Naaz-jzc7H6STadIUqo_h&opi=89978449)
+> Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
 
-## Running Code
+Italics:
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+_Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos._
 
-```{r}
-1 + 1
-```
+Bold:
 
-You can add options to executable code like this 
+**Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.**
 
-```{r}
-#| echo: false
-2 * 2
-```
+Link:
 
-The `echo: false` option disables the printing of code (only output is displayed).
+[Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos](frank-kovacs.net)
+
