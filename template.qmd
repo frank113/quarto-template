@@ -13,7 +13,6 @@ format:
     keep_tex: false
   html:
     highlight-style: github
-    
 geometry: margin=0.75in
 fontsize: 11pt
 ---
